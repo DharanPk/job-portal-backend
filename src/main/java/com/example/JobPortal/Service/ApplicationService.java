@@ -14,7 +14,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -66,5 +71,22 @@ public class ApplicationService {
         application.setStatus(dto.getStatus());
         return repo.save(application);
 
+    }
+
+    public void uploadFile(ApplicatioDTO applicationDTO) throws IOException {
+        System.out.println(applicationDTO.getFile().getName());
+
+        saveFile(applicationDTO.getFile());
+    }
+
+    public void saveFile(MultipartFile file) throws IOException {
+
+        String uploadDir = "D:\\java\\JobPortal\\Uploads/";
+
+        Path path = Paths.get(uploadDir + file.getOriginalFilename());
+
+        Files.write(path, file.getBytes());
+
+        System.out.println("File saved successfully");
     }
 }

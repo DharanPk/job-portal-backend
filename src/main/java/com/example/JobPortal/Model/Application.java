@@ -27,4 +27,8 @@ public class Application {
     private Job job;
 
     private String status;
+
+    private ApplicationStatus applicationStatus;
+
+    private String resumePath;
 }

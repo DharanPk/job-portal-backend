@@ -10,6 +10,7 @@ import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,6 +55,12 @@ public class ApplicationController {
 
         }
 
+    }
+
+    @PostMapping("/file")
+    public ResponseEntity<String> uploadFile(@ModelAttribute ApplicatioDTO applicationDTO) throws IOException {
+        s.uploadFile(applicationDTO);
+        return ResponseEntity.ok("SUCCESS");
     }
 
 }
